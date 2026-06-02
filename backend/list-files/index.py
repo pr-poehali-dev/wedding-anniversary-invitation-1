@@ -67,15 +67,22 @@ def list_s3_files():
     with urllib.request.urlopen(req, timeout=15) as resp:
         content = resp.read().decode('utf-8')
 
-    ns = {'s3': 'http://s3.amazonaws.com/doc/2006-03-01/'}
     root = ET.fromstring(content)
+    ns_uri = root.tag.split('}')[0].strip('{') if '}' in root.tag else ''
+    ns = {'s3': ns_uri} if ns_uri else {}
+    prefix = 's3:' if ns_uri else ''
+
     files = []
-    for obj in root.findall('s3:Contents', ns):
-        key = obj.find('s3:Key', ns).text
-        size = int(obj.find('s3:Size', ns).text)
-        cdn_url = f'https://cdn.poehali.dev/projects/{access_key}/files/{key}'
+    for obj in root.iter(f'{"{" + ns_uri + "}" if ns_uri else ""}Contents'):
+        key_el = obj.find(f'{"{" + ns_uri + "}" if ns_uri else ""}Key')
+        size_el = obj.find(f'{"{" + ns_uri + "}" if ns_uri else ""}Size')
+        if key_el is None:
+            continue
+        key = key_el.text
+        size = int(size_el.text) if size_el is not None else 0
+        cdn_url = f'https://cdn.poehali.dev/projects/{access_key}/bucket/{key}'
         files.append({'key': key, 'url': cdn_url, 'size': size})
-    return files
+    return files, content[:500]
 
 
 def handler(event: dict, context) -> dict:
@@ -91,10 +98,10 @@ def handler(event: dict, context) -> dict:
     if event.get('httpMethod') == 'OPTIONS':
         return {'statusCode': 200, 'headers': cors_headers, 'body': ''}
 
-    files = list_s3_files()
+    files, raw = list_s3_files()
 
     return {
         'statusCode': 200,
         'headers': cors_headers,
-        'body': json.dumps({'files': files, 'count': len(files)}, ensure_ascii=False)
+        'body': json.dumps({'files': files, 'count': len(files), 'raw': raw}, ensure_ascii=False)
     }
