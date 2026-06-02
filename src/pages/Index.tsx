@@ -2,10 +2,10 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 
 const RSVP_URL = 'https://functions.poehali.dev/0fcb315f-5249-458d-a19c-400faf0409d6';
 
-const PHOTO_MAIN = 'https://cdn.poehali.dev/projects/9a81503f-12b5-425e-b745-f171500d6f22/files/fa0f3bbf-4509-4a48-9c32-f3f1e7824421.jpg';
-const PHOTO_1 = 'https://cdn.poehali.dev/projects/9a81503f-12b5-425e-b745-f171500d6f22/files/61448095-4160-45f9-b430-6adf876885f0.jpg';
-const PHOTO_2 = 'https://cdn.poehali.dev/projects/9a81503f-12b5-425e-b745-f171500d6f22/files/df448562-2a73-4f48-ad7d-e5a6e9878c00.jpg';
-const PHOTO_3 = 'https://cdn.poehali.dev/projects/9a81503f-12b5-425e-b745-f171500d6f22/files/bfdcead5-c612-498a-9a97-bbefbe53127b.jpg';
+const PHOTO_MAIN = 'https://cdn.poehali.dev/projects/9a81503f-12b5-425e-b745-f171500d6f22/bucket/52dff103-8c40-4c0b-ad10-2d638fffa7f0.jpg';
+const PHOTO_1 = 'https://cdn.poehali.dev/projects/9a81503f-12b5-425e-b745-f171500d6f22/bucket/14c685f4-2682-47ee-b642-4aaf05f8ab3a.jpg';
+const PHOTO_2 = 'https://cdn.poehali.dev/projects/9a81503f-12b5-425e-b745-f171500d6f22/bucket/edeaffe4-a385-49e5-bad5-5ae803ae6696.jpg';
+const PHOTO_3 = 'https://cdn.poehali.dev/projects/9a81503f-12b5-425e-b745-f171500d6f22/bucket/2e43721b-2d98-4819-939f-add8445d0443.jpg';
 
 function useInView(threshold = 0.15) {
   const ref = useRef<HTMLDivElement>(null);
