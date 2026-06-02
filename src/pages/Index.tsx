@@ -200,7 +200,7 @@ export default function Index() {
 
   return (
     <div onClick={handlePageClick} style={{ background: '#0e0e0e', fontFamily: "'Cormorant Garamond', serif" }}>
-      <audio ref={audioRef} src="/music.mp3" loop />
+      <audio ref={audioRef} src="https://cdn.poehali.dev/projects/9a81503f-12b5-425e-b745-f171500d6f22/bucket/5875f233-ccdf-495a-8d9f-799eaf85bc6e.mp3" loop />
 
       {/* BLOCK 1 */}
       <Block photoSrc={PHOTO_MAIN} photoLeft={true}>
@@ -237,7 +237,7 @@ export default function Index() {
             letterSpacing: '0.2em',
             color: '#ccc',
             textTransform: 'uppercase',
-          }}>26 сентября 2026 · 18:00</p>
+          }}>26 сентября 2026 · 17:00</p>
         </div>
       </Block>
 
@@ -335,8 +335,8 @@ export default function Index() {
             lineHeight: 2,
           }}>
             26 сентября 2026<br />
-            Сбор с 17:30<br />
-            Начало в 18:00
+            Сбор с 16:30<br />
+            Начало в 17:00
           </p>
         </div>
       </Block>
