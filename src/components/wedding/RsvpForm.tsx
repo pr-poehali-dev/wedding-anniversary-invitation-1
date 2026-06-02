@@ -266,14 +266,14 @@ export default function RsvpForm({ photos }: RsvpFormProps) {
         gap: '6px',
       }}>
         {photos.map((src, i) => (
-          <a key={i} href={src} target="_blank" rel="noopener noreferrer" style={{ display: 'block', overflow: 'hidden', aspectRatio: '1' }}>
+          <a key={i} href={src} target="_blank" rel="noopener noreferrer" style={{ display: 'block', overflow: 'hidden' }}>
             <img
               src={src}
               alt=""
               style={{
                 width: '100%',
-                height: '100%',
-                objectFit: 'cover',
+                height: 'auto',
+                objectFit: 'contain',
                 filter: 'grayscale(100%) brightness(0.7)',
                 transition: 'transform 0.35s ease, filter 0.35s ease',
                 display: 'block',
