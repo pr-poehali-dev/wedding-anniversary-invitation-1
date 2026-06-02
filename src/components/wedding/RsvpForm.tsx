@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 
 const RSVP_URL = 'https://functions.poehali.dev/0fcb315f-5249-458d-a19c-400faf0409d6';
 
+const DRINKS = ['Водка', 'Коньяк', 'Белое полусладкое', 'Красное полусладкое', 'Безалкогольные напитки'];
+const COMMENT_PLACEHOLDER = 'Если Вы идете с парой или с семьей, напишите все имена и фамилии, а так же пожелания по меню. Вы очень нам поможете.';
+
 interface RsvpFormProps {
   photos: string[];
 }
@@ -12,6 +15,7 @@ export default function RsvpForm({ photos }: RsvpFormProps) {
     attending: '',
     drinks: [] as string[],
     meal: '',
+    comment: '',
   });
   const [formError, setFormError] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
@@ -50,7 +54,7 @@ export default function RsvpForm({ photos }: RsvpFormProps) {
         ? `${form.name.split(' ')[0]}, спасибо, ждём!`
         : `${form.name.split(' ')[0]}, жаль, увидимся в другой раз`;
       setSuccessMsg(msg);
-      setTimeout(() => setSuccessMsg(''), 4000);
+      setTimeout(() => setSuccessMsg(''), 6000);
     } catch {
       setFormError('Ошибка отправки. Попробуйте снова.');
     }
@@ -94,8 +98,22 @@ export default function RsvpForm({ photos }: RsvpFormProps) {
         letterSpacing: '0.3em',
         color: '#888',
         textTransform: 'uppercase',
-        marginBottom: '32px',
+        marginBottom: '16px',
       }}>Подтверждение</p>
+
+      {/* Deadline reminder */}
+      <p style={{
+        fontFamily: "'Cormorant Garamond', serif",
+        fontSize: 'clamp(15px, 1.8vw, 18px)',
+        color: '#bbb',
+        lineHeight: 1.7,
+        fontStyle: 'italic',
+        marginBottom: '32px',
+      }}>
+        Будем очень признательны, если<br />
+        Вы сообщите нам о своём<br />
+        решении до 12.09.26г.
+      </p>
 
       {/* Name */}
       <div style={{ marginBottom: '24px' }}>
@@ -140,7 +158,7 @@ export default function RsvpForm({ photos }: RsvpFormProps) {
       <div style={{ marginBottom: '24px' }}>
         <label style={labelStyle}>Что буду пить</label>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          {['Водка', 'Коньяк', 'Белое полусладкое', 'Красное полусладкое'].map(drink => (
+          {DRINKS.map(drink => (
             <label key={drink} style={{
               display: 'flex',
               alignItems: 'center',
@@ -203,6 +221,22 @@ export default function RsvpForm({ photos }: RsvpFormProps) {
         </div>
       )}
 
+      {/* Comment */}
+      <div style={{ marginBottom: '24px' }}>
+        <label style={labelStyle}>Комментарий</label>
+        <textarea
+          style={{
+            ...inputStyle,
+            resize: 'vertical',
+            minHeight: '100px',
+            lineHeight: 1.6,
+          }}
+          value={form.comment}
+          onChange={e => setForm(f => ({ ...f, comment: e.target.value }))}
+          placeholder={COMMENT_PLACEHOLDER}
+        />
+      </div>
+
       {/* Error */}
       {formError && (
         <p style={{
@@ -242,16 +276,17 @@ export default function RsvpForm({ photos }: RsvpFormProps) {
       {/* Success message */}
       {successMsg && (
         <div style={{
-          marginTop: '20px',
-          padding: '16px',
-          background: 'rgba(255,255,255,0.05)',
-          border: '1px solid rgba(255,255,255,0.15)',
+          marginTop: '24px',
+          padding: '24px 20px',
+          background: 'rgba(255,255,255,0.06)',
+          border: '1px solid rgba(255,255,255,0.2)',
           borderRadius: '2px',
           fontFamily: "'Cormorant Garamond', serif",
-          fontSize: '18px',
-          color: '#e8e8e8',
+          fontSize: 'clamp(26px, 4vw, 36px)',
+          color: '#f0f0f0',
           fontStyle: 'italic',
           textAlign: 'center',
+          lineHeight: 1.3,
           animation: 'fadeIn 0.4s ease',
         }}>
           {successMsg}

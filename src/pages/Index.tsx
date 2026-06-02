@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import Block from '@/components/wedding/Block';
 import RsvpForm from '@/components/wedding/RsvpForm';
 import MusicPlayer, { type MusicPlayerHandle } from '@/components/wedding/MusicPlayer';
+import Countdown from '@/components/wedding/Countdown';
 
 const PHOTO_MAIN = 'https://cdn.poehali.dev/projects/9a81503f-12b5-425e-b745-f171500d6f22/bucket/52dff103-8c40-4c0b-ad10-2d638fffa7f0.jpg';
 const PHOTO_1 = 'https://cdn.poehali.dev/projects/9a81503f-12b5-425e-b745-f171500d6f22/bucket/14c685f4-2682-47ee-b642-4aaf05f8ab3a.jpg';
@@ -160,6 +161,8 @@ export default function Index() {
         </div>
       </Block>
 
+      <Countdown />
+
       {/* BLOCK 4 — RSVP */}
       <Block photoSrc={PHOTO_3} photoLeft={false}>
         <RsvpForm photos={ALL_PHOTOS} />
@@ -200,9 +203,13 @@ export default function Index() {
           }
         }
         input::placeholder { color: #555; }
+        textarea::placeholder { color: #555; }
         * { box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body { margin: 0; }
+        @media (max-width: 600px) {
+          .wedding-gallery img { width: 100%; height: auto; }
+        }
       `}</style>
     </div>
   );

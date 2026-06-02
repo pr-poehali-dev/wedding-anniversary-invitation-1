@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback, forwardRef, useImperativeHandle } from 'react';
 
-const MUSIC_SRC = 'https://cdn.poehali.dev/projects/9a81503f-12b5-425e-b745-f171500d6f22/bucket/5875f233-ccdf-495a-8d9f-799eaf85bc6e.mp3';
+const MUSIC_SRC = 'https://cdn.poehali.dev/projects/9a81503f-12b5-425e-b745-f171500d6f22/bucket/40ae0a0d-85cc-456f-bcd7-cb68ef2edd4f.mp3';
 
 export interface MusicPlayerHandle {
   handlePageClick: () => void;
