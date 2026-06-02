@@ -1,0 +1,31 @@
+{
+  "tests": [
+    {
+      "name": "RSVP attending yes",
+      "method": "POST",
+      "path": "/",
+      "body": {"name": "Иван Петров", "attending": "yes", "drinks": ["Вино"], "meal": "Мясо"},
+      "expectedStatus": 200,
+      "expectedBody": {"success": true},
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "RSVP attending no",
+      "method": "POST",
+      "path": "/",
+      "body": {"name": "Мария Иванова", "attending": "no", "drinks": [], "meal": ""},
+      "expectedStatus": 200,
+      "expectedBody": {"success": true},
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "RSVP missing fields",
+      "method": "POST",
+      "path": "/",
+      "body": {"name": ""},
+      "expectedStatus": 400,
+      "expectedBody": {"error": "Не заполнены обязательные поля"},
+      "bodyMatcher": "partial"
+    }
+  ]
+}
